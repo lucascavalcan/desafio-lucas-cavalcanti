@@ -76,5 +76,5 @@ Este projeto foi desenvolvido como parte de um desafio técnico. No entanto, fiq
 
 ### Autor
 Projeto criado por [Lucas Cavalcanti de Araujo](https://lucascavalcan.github.io/) </br>
-Em casos de dúvidas, entrar em contato através do e-mail: lcavalcantidearaujo@gmail.com </br>
+Em caso de dúvidas, entrar em contato através do e-mail: lcavalcantidearaujo@gmail.com </br>
 Feito com ❤️
