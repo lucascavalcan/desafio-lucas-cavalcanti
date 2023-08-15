@@ -34,14 +34,12 @@ npm install
 ```
 npm test
 ```
-6. Para utilizar a aplicação em um cenário real, edite o arquivo index.js com os itens e forma de pagamento desejados e execute o comando:
 
-```
-node index.js
-```
 ### Exemplos de Uso
+1. Para utilizar a aplicação em um cenário real, edite o arquivo index.js com os itens e forma de pagamento desejados, como no exemplo abaixo:
+   
 ```js
-const CaixaDaLanchonete = require('./src/caixa-da-lanchonete');
+import { CaixaDaLanchonete } from './src/caixa-da-lanchonete.js';
 
 const caixa = new CaixaDaLanchonete();
 const formaDePagamento = 'debito';
@@ -49,6 +47,11 @@ const itens = ['cafe,1', 'chantily,1'];
 
 const valorTotal = caixa.calcularValorDaCompra(formaDePagamento, itens);
 console.log(`Valor Total: ${valorTotal}`);
+```
+2. Após isso, execute o comando:
+
+```
+node index.js
 ```
 
 Dentre os ítens disponíveis para compra, temos os seguintes produtos no cardápio:
@@ -69,7 +72,7 @@ Além disso, a Lanchonete aceita as seguintes formas de pagamento:
  - debito
  - credito
 
-Para realizar um pedido, o usuário deve selecionar o produto e a forma de pagamento conforme pode ser mostrado no exemplo acima.
+Para realizar um pedido, o usuário deve selecionar o produto e a forma de pagamento conforme foi mostrado no exemplo acima.
 
 ### Contribuição
 Este projeto foi desenvolvido como parte de um desafio técnico. No entanto, fique à vontade para contribuir com melhorias, correções de bugs ou novas funcionalidades. Basta abrir um pull request com suas alterações.
