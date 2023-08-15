@@ -20,7 +20,6 @@ Neste projeto, criei uma aplicação em JavaScript para automatizar o processo d
 1. Instale o Node.js em sua máquina.
 
 2. Clone este repositório para sua máquina local com o comando:
-
 ```bash
 $ git clone <https://github.com/lucascavalcan/desafio-lucas-cavalcanti>
 ```
@@ -28,20 +27,17 @@ $ git clone <https://github.com/lucascavalcan/desafio-lucas-cavalcanti>
 3. No terminal, navegue até o diretório do projeto.
 
 4. Instale as dependências usando o comando:
-
 ```
 npm install
 ```
 
 5. Execute os testes automatizados com o comando:
-
 ```
 npm test
 ```
 
 ### Exemplos de Uso
 1. Para utilizar a aplicação em um cenário real, edite o arquivo index.js com os itens e forma de pagamento desejados, como no exemplo abaixo:
-   
 ```js
 import { CaixaDaLanchonete } from './src/caixa-da-lanchonete.js';
 
@@ -54,7 +50,6 @@ console.log(`Valor Total: ${valorTotal}`);
 ```
 
 2. Após isso, execute o comando:
-
 ```
 node index.js
 ```
