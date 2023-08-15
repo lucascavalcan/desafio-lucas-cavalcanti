@@ -38,16 +38,7 @@ npm test
 
 ### Exemplos de Uso
 1. Para utilizar a aplicação em um cenário real, o usuário deve executar o arquivo index.js, no qual vai ser perguntado a forma de pagamento e os itens que o consumidor deseja efetuar a compra, conforme pode ser visto no exemplo abaixo:
-```js
-import { CaixaDaLanchonete } from './src/caixa-da-lanchonete.js';
-
-const caixa = new CaixaDaLanchonete();
-const formaDePagamento = 'debito';
-const itens = ['cafe,1', 'chantily,1'];
-
-const valorTotal = caixa.calcularValorDaCompra(formaDePagamento, itens);
-console.log(`Valor Total: ${valorTotal}`);
-```
+![index](./src/video/demonstration.mp4)
 
 2. Após isso, execute o comando:
 ```
