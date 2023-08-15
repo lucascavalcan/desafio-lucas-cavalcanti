@@ -37,7 +37,7 @@ npm test
 ```
 
 ### Exemplos de Uso
-1. Para utilizar a aplicação em um cenário real, edite o arquivo index.js com os itens e forma de pagamento desejados, como no exemplo abaixo:
+1. Para utilizar a aplicação em um cenário real, o usuário deve executar o arquivo index.js, no qual vai ser perguntado a forma de pagamento e os itens que o consumidor deseja efetuar a compra, conforme pode ser visto no exemplo abaixo:
 ```js
 import { CaixaDaLanchonete } from './src/caixa-da-lanchonete.js';
 
