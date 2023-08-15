@@ -1,6 +1,6 @@
 # Projeto Caixa da Lanchonete
 
-Este é o meu projeto desenvolvido como parte do desafio "Caixa da Lanchonete" da [DB](https://start.db.tec.br/). O desafio consiste em criar uma lógica que calcule o valor de uma compra de acordo com o cardápio, regras e descontos da Lanchonete.
+Este é o meu projeto desenvolvido como parte do desafio "Caixa da Lanchonete" da [DBServer](https://start.db.tec.br/). O desafio consiste em criar uma lógica que calcule o valor de uma compra de acordo com o cardápio, regras e descontos da Lanchonete.
 
 ### Descrição
 Neste projeto, criei uma aplicação em JavaScript para automatizar o processo de cálculo do valor de uma compra na Lanchonete da DB. A aplicação recebe informações sobre a forma de pagamento e os itens selecionados pelo cliente e calcula o valor total da compra, aplicando descontos e acréscimos conforme as regras definidas.
