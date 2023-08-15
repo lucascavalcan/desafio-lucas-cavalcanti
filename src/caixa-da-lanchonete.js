@@ -1,6 +1,6 @@
 class CaixaDaLanchonete {
-    constructor(){
-        this.precoDosItens = {
+    constructor() {
+        this.precosDosItens = {
             cafe: 3.00,
             chantily: 1.50,
             suco: 6.20,
@@ -10,162 +10,103 @@ class CaixaDaLanchonete {
             combo1: 9.50,
             combo2: 7.50
         };
-    } 
-    calcularValorDaCompra(metodoDePagamento, itens) {
-        if (!this.validaSeExistemItens(itens)) {
-            return "Não há itens no carrinho de compra!"
-        }
-        let novoArrayDeItens = this.transformarArrayDeItens(itens);
+    }
 
-        if (!this.validaMetodoDePagamento(metodoDePagamento)) {
-            return "Forma de pagamento inválida!"
+    calcularValorDaCompra(formaPagto, pedidos) {
+        if (!this.temPedidos(pedidos)) {
+            return "Não há itens no carrinho de compra!";
         }
-        if (!this.validaItens(novoArrayDeItens)) {
-            return "Item inválido!"
-        }
-        if (!this.validaQuantidadeDeItens(novoArrayDeItens)) {
-            return "Quantidade inválida!"
-        }
-        if (!this.validaSePodeAdicionarItemExtra(novoArrayDeItens)) {
-            return "Item extra não pode ser pedido sem o principal"
-        }
-       
-        const precoParcial = this.calculaPrecoParcial(novoArrayDeItens)
-        const precoFinal = this.calculaPrecoFinal(precoParcial, metodoDePagamento)
-        const precoFinalFormatado = precoFinal.toFixed(2).replaceAll('.', ',')
-        return `R$ ${precoFinalFormatado}`
-    }
-    validaSeExistemItens(itens) {
-        let existemItens = true;
-        if (!itens.length || !itens) {
-            existemItens = false;
-        }
-        return existemItens;
-    }
-    transformarArrayDeItens(itens) {
-        const novoArrayDeItens = itens.map((item) => {
-            const arrayDoItem = item.split(',');
-            return { nome: arrayDoItem[0], quantidade: arrayDoItem[1] };
-        })
-        return novoArrayDeItens;
-    }
-    validaMetodoDePagamento(metodoPagamento) {
-        let valido = false;
-        if (metodoPagamento == 'debito' || metodoPagamento == 'credito' || metodoPagamento == 'dinheiro') {
-            valido = true;
-        }
-        return valido
-    }
-    validaItens(itens) {
-        let valido = true;
-        for (const item of itens) {
-            switch (item.nome) {
-                case "cafe":
-                    valido = true;
-                    break;
-                case "chantily":
-                    valido = true;
-                    break;
-                case "suco":
-                    valido = true;
-                    break;
-                case "sanduiche":
-                    valido = true;
-                    break;
-                case "queijo":
-                    valido = true;
-                    break;
-                case "salgado":
-                    valido = true;
-                    break;
-                case "combo1":
-                    valido = true;
-                    break;
-                case "combo2":
-                    valido = true;
-                    break;
-                default:
-                    valido = false;
-                    break;
-            }
-            if (!valido) {
-                break;
-            }
-        };
-        return valido;
-    }
-    validaQuantidadeDeItens(itens) {
-        let valido = true;
-        for (const item of itens) {
-            if (item.quantidade == 0) {
-                valido = false;
-                break;
-            }
-        }
-        return valido;
-    }
-    validaSePodeAdicionarItemExtra(itens) {
-        let podePedirChantily = true;
-        let podePedirQueijo = true;
 
-        for (const item of itens) {
-            if (item.nome === "chantily" && !itens.some((i) => i.nome === "cafe")) {
-                podePedirChantily = false;
-            }
-            if (item.nome === "queijo" && !itens.some((i) => i.nome === "sanduiche")) {
-                podePedirQueijo = false;
-            }
+        const itensDoPedido = this.converterPedidos(pedidos);
+
+        if (!this.ehFormaPagamentoValida(formaPagto)) {
+            return "Forma de pagamento inválida!";
         }
-        let podeItemExtra = podePedirChantily && podePedirQueijo
-        return podeItemExtra;
+
+        if (!this.saoItensValidos(itensDoPedido)) {
+            return "Item inválido!";
+        }
+
+        if (!this.quantidadesSaoValidas(itensDoPedido)) {
+            return "Quantidade inválida!";
+        }
+
+        if (!this.podeAdicionarExtra(itensDoPedido)) {
+            return "Item extra não pode ser pedido sem o principal";
+        }
+
+        const subTotal = this.calcularSubTotal(itensDoPedido);
+        const precoFinal = this.calcularPrecoFinal(subTotal, formaPagto);
+        const precoFormatado = precoFinal.toFixed(2).replace('.', ',');
+        return `R$ ${precoFormatado}`;
     }
-    calculaPrecoParcial(itens) {
-        let precoParcial = 0;
-        itens.forEach(item => {
-            switch (item.nome) {
-                case "cafe":
-                    precoParcial += this.precoDosItens.cafe * item.quantidade;
-                    break;
-                case "chantily":
-                    precoParcial += this.precoDosItens.chantily * item.quantidade;
-                    break;
-                case "suco":
-                    precoParcial += this.precoDosItens.suco * item.quantidade;
-                    break;
-                case "sanduiche":
-                    precoParcial += this.precoDosItens.sanduiche * item.quantidade;
-                    break;
-                case "queijo":
-                    precoParcial += this.precoDosItens.queijo * item.quantidade;
-                    break;
-                case "salgado":
-                    precoParcial += this.precoDosItens.salgado * item.quantidade;
-                    break;
-                case "combo1":
-                    precoParcial += this.precoDosItens.combo1 * item.quantidade;
-                    break;
-                case "combo2":
-                    precoParcial += this.precoDosItens.combo2 * item.quantidade;
-                    break;
-            }
+
+    temPedidos(pedidos) {
+        return pedidos && pedidos.length > 0;
+    }
+
+    converterPedidos(pedidos) {
+        const itensDoPedido = pedidos.map((pedido) => {
+            const partes = pedido.split(',');
+            return { item: partes[0], quantidade: partes[1] };
         });
-        return precoParcial;
+        return itensDoPedido;
     }
-    calculaPrecoFinal(precoParcial, metodoDePagamento) {
-        let precoFinal = 0;
-        switch (metodoDePagamento) {
-            case 'dinheiro':
-                precoFinal = precoParcial - (precoParcial * 5 / 100);
-                break;
-            case 'credito':
-                precoFinal = precoParcial + (precoParcial * 3 / 100);
-                break;
-            case 'debito':
-                precoFinal = precoParcial;
-                break;
-        }
-        return precoFinal;
 
+    ehFormaPagamentoValida(formaPagto) {
+        return formaPagto === 'debito' || formaPagto === 'credito' || formaPagto === 'dinheiro';
+    }
+
+    saoItensValidos(itensDoPedido) {
+        for (const item of itensDoPedido) {
+            if (!this.precosDosItens.hasOwnProperty(item.item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    quantidadesSaoValidas(itensDoPedido) {
+        for (const item of itensDoPedido) {
+            if (item.quantidade <= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    podeAdicionarExtra(itensDoPedido) {
+        let podeChantily = true;
+        let podeQueijo = true;
+
+        for (const item of itensDoPedido) {
+            if (item.item === "chantily" && !itensDoPedido.some((i) => i.item === "cafe")) {
+                podeChantily = false;
+            }
+            if (item.item === "queijo" && !itensDoPedido.some((i) => i.item === "sanduiche")) {
+                podeQueijo = false;
+            }
+        }
+        return podeChantily && podeQueijo;
+    }
+
+    calcularSubTotal(itensDoPedido) {
+        let subTotal = 0;
+        for (const item of itensDoPedido) {
+            subTotal += this.precosDosItens[item.item] * item.quantidade;
+        }
+        return subTotal;
+    }
+
+    calcularPrecoFinal(subTotal, formaPagto) {
+        switch (formaPagto) {
+            case 'dinheiro':
+                return subTotal * 0.95;
+            case 'credito':
+                return subTotal * 1.03;
+            case 'debito':
+                return subTotal;
+        }
     }
 }
 
