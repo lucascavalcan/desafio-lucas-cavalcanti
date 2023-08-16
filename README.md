@@ -37,14 +37,14 @@ npm test
 ```
 
 ### Exemplos de Uso
-1. Para utilizar a aplicação em um cenário real, o usuário deve executar o arquivo index.js, no qual vai ser perguntado a forma de pagamento e os itens que o consumidor deseja efetuar a compra, conforme pode ser visto no exemplo abaixo:
-
-https://github.com/lucascavalcan/desafio-lucas-cavalcanti/assets/98985618/cac4a87e-f47e-4fd4-9007-099e88701794
-
-2. Após isso, execute o comando:
+1. Para utilizar a aplicação em um cenário real, o usuário deve executar o arquivo index.js com o seguinte comando: 
 ```
 node index.js
 ```
+
+2. Dessa forma, vai ser perguntado a forma de pagamento e os itens que o consumidor deseja efetuar a compra, conforme pode ser visto no exemplo abaixo:
+
+https://github.com/lucascavalcan/desafio-lucas-cavalcanti/assets/98985618/cac4a87e-f47e-4fd4-9007-099e88701794
 
 Dentre os ítens disponíveis para compra, temos os seguintes produtos no cardápio:
 
